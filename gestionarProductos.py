@@ -1,30 +1,6 @@
-inventario = []
+inventario = [] # Lista donde se almacenará los valores obtenidos en producto
 
-#Menú que pregunta al usuario que acción desea realizar
-option = 0
-
-while option != 4:
-    print("\n----------Inventario----------")
-
-    print("\nSelecione el número según la opción que desee elegir")
-
-    print("\nSelecciona la opción que necesite " 
-    "\n1. Agregar producto " 
-    "\n2. Mostrar inventario" 
-    "\n3. Calcular estadísticas"
-    "\n4. Salir")
-
-    try:
-        option = int(input("Ingrese la opción: "))
-        print("------------------------------")
-
-        if option not in range(1,4+1):
-            print("\nSeleccione una opción dentro del rango")
-            continue
-    except ValueError:
-        print("\nValor no válido, por ingrese el numero acorde a su opción")
-        continue
-  
+#Realizar validaciones para los respectivos campos 
 def agregar_producto():
     print("\nIngrese los datos del producto\n")
 
@@ -63,7 +39,7 @@ def agregar_producto():
             continue
 
         try: 
-            ammount = int(price)
+            ammount = int(ammount)
         except ValueError:
             print("Debe ingresar un número")
             continue
@@ -82,20 +58,16 @@ def agregar_producto():
     inventario.append(producto)
     print("El producto se agregó correctamente")
 
-if option == 1:
-    agregar_producto()
-
+#Mostrar los productos almacenado en inventario de forma ordenada
 def mostrar_inventario():
     if not inventario:
-        print("No hay productos en el inventario")
+        print("\nNo hay productos en el inventario")
     else:
         print("\n--Productos que se encuentran en el inventario--\n")
     for item in inventario:
         print(f"Nombre: {item['Nombre']} | Precio: {item['Precio']} | Cantidad: {item['Cantidad']}")
 
-if option == 2:
-    mostrar_inventario()
-
+#Calcular el valor total de todos los productos y cuántos de estos hay
 def calcular_estadistica():
     # Total del inventario
     valor_total_inventario = sum(
@@ -112,10 +84,37 @@ def calcular_estadistica():
 
     print(f"Usted tiene {cantidad_productos_registrados} producto(s) registrados.")
     
-if option == 3:
-    calcular_estadistica()
 
-print("It´s ok")
-        
-print("\nSaliendo del programa... ¡Hasta luego!\n ")
+#Menú que pregunta constantemente al usuario que acción desea realizar y sus respectivas validaciones
+option = 0
+
+while option != 4:
+    print("\n----------Inventario----------")
+
+    print("\nSelecione el número según la opción que desee elegir")
+
+    print("\nSelecciona la opción que necesite " 
+    "\n1. Agregar producto " 
+    "\n2. Mostrar inventario" 
+    "\n3. Calcular estadísticas"
+    "\n4. Salir")
+
+    try:
+        option = int(input("Ingrese la opción: "))
+
+        if option not in range(1,4+1):
+            print("\nSeleccione una opción dentro del rango")
+            continue
+    except ValueError:
+        print("\nValor no válido, por ingrese el numero acorde a su opción")
+        continue
+
+    if option == 1:
+        agregar_producto()
+    elif option == 2:
+        mostrar_inventario()
+    elif option == 3:
+        calcular_estadistica()
+    elif option == 4:
+        print("\nSaliendo del programa... ¡Hasta luego!\n")
                                         
